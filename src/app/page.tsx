@@ -46,6 +46,12 @@ export default function Home() {
             description="Turn each page into a clean PNG and download them all in a single ZIP."
             icon={<PdfPageIcon />}
           />
+          <ToolCard
+            href="/pdf-sign"
+            title="Sign a PDF"
+            description="Type your signature (any font), drag it onto pages, and download."
+            icon={<PdfPageIcon />}
+          />
         </section>
 
         {/* Features */}
