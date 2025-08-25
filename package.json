@@ -17,6 +17,7 @@
     "jszip": "^3.10.1",
     "next": "15.5.0",
     "npm": "^11.5.2",
+    "papaparse": "^5.5.3",
     "pdf-lib": "^1.17.1",
     "pdf2pic": "^3.2.0",
     "pdfjs-dist": "^5.4.54",
@@ -24,7 +25,8 @@
     "react-dom": "19.1.0",
     "react-pdf": "^10.1.0",
     "react-rnd": "^10.5.2",
-    "react-signature-canvas": "^1.1.0-alpha.2"
+    "react-signature-canvas": "^1.1.0-alpha.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

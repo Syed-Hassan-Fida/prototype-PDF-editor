@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -29,15 +29,27 @@ export default function Home() {
             >
               PDF → Images (ZIP)
             </Link>
+            <Link
+              href="/csv-to-excel"
+              className="rounded-lg border border-white/10 bg-white/[0.02] px-5 py-2.5 text-sm text-slate-200 hover:bg-white/[0.06]"
+            >
+              CSV → Excel
+            </Link>
+            <Link
+              href="/excel-to-csv"
+              className="rounded-lg border border-white/10 bg-white/[0.02] px-5 py-2.5 text-sm text-slate-200 hover:bg-white/[0.06]"
+            >
+              Excel → CSV
+            </Link>
           </div>
         </section>
 
         {/* Tools */}
-        <section className="grid gap-6 md:grid-cols-2">
+        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ToolCard
             href="/image-to-pdf"
             title="Image to PDF"
-            description="Combine PNG/JPG/WebP into a crisp multi‑page PDF — drag, reorder, convert."
+            description="Combine PNG/JPG/WebP into a crisp multi-page PDF — drag, reorder, convert."
             icon={<ImageStackIcon />}
           />
           <ToolCard
@@ -52,13 +64,25 @@ export default function Home() {
             description="Type your signature (any font), drag it onto pages, and download."
             icon={<PdfPageIcon />}
           />
+          <ToolCard
+            href="/csv-to-excel"
+            title="CSV to Excel"
+            description="Easily convert CSV files into clean, structured Excel spreadsheets."
+            icon={<TableIcon />}
+          />
+          <ToolCard
+            href="/excel-to-csv"
+            title="Excel to CSV"
+            description="Export your Excel data as lightweight, universal CSV files."
+            icon={<TableIcon />}
+          />
         </section>
 
         {/* Features */}
         <section className="mt-12 grid gap-4 sm:grid-cols-3 text-sm">
           <FeatureCard title="SSR by default" desc="Next.js App Router pages render fast and are SEO friendly." />
           <FeatureCard title="Secure & ephemeral" desc="Processed in memory and not persisted on the server." />
-          <FeatureCard title="Accessible UI" desc="Keyboard-friendly, high-contrast, and screen‑reader considerate." />
+          <FeatureCard title="Accessible UI" desc="Keyboard-friendly, high-contrast, and screen-reader considerate." />
         </section>
 
         {/* Footer note */}
@@ -178,6 +202,25 @@ function PdfPageIcon() {
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <path d="M14 2v6h6" />
       <rect x="8" y="13" width="8" height="5" rx="1" />
+    </svg>
+  );
+}
+
+function TableIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <path d="M3 9h18M9 21V9" />
     </svg>
   );
 }
