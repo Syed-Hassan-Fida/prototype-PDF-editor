@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
 
 export default function ExcelToCsvPage() {
   type Phase = "idle" | "ready" | "uploading" | "converting" | "success" | "error";
@@ -77,15 +76,15 @@ export default function ExcelToCsvPage() {
           const url = URL.createObjectURL(blob);
           setCsvUrl(url);
           setPhase("success");
-        } catch (err: any) {
+        } catch (err: unknown) {
           setError("Conversion failed. Make sure the Excel file is valid.");
-          setPhase("error");
+          setPhase(`error ${err}`);
         }
       };
       reader.readAsBinaryString(f);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError("Unexpected error occurred.");
-      setPhase("error");
+      setPhase(`error ${err}`);
     }
   };
 
