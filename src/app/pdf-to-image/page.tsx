@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -94,8 +93,8 @@ export default function PdfToImagePage() {
       // Otherwise, read text for error detail
       const msg = await res.text();
       throw new Error(msg || 'Conversion failed.');
-    } catch (e: any) {
-      setError(e?.message || 'Unexpected error.');
+    } catch (e: unknown) {
+      setError((e as Error).message || 'Unexpected error.');
       setPhase('error');
     }
   };

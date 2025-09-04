@@ -1,26 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
-import fs from "fs/promises";
-import { docToMarkdown } from "@/lib/docxToMarkdown";
+import mammoth from "mammoth";
+import TurndownService from "turndown";
 
 export async function POST(req: NextRequest) {
-    try {
-        const formData = await req.formData();
-        const file = formData.get("file") as File;
+  try {
+    const formData = await req.formData();
+    const file = formData.get("file") as File;
 
-        if (!file) return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
-
-        // Save file temporarily
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const filePath = path.join(process.cwd(), "tmp", file.name);
-        await fs.writeFile(filePath, buffer);
-
-        // Convert DOCX → Markdown
-        const markdown = await docToMarkdown(filePath);
-
-        return NextResponse.json({ markdown });
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    if (!file) {
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
+
+    // Read file into buffer (no saving to disk)
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    // Extract DOCX → HTML (preserves formatting)
+    const { value: html } = await mammoth.convertToHtml({ buffer });
+
+    // Convert HTML → Markdown
+    const turndown = new TurndownService({
+      headingStyle: "atx",
+      hr: "---",
+      bulletListMarker: "-",
+    });
+
+    turndown.addRule("strikethrough", {
+      filter: ["del", "s"],
+      replacement: (content) => `~~${content}~~`,
+    });
+
+    const markdown = turndown.turndown(html).trim();
+
+    return NextResponse.json({ markdown });
+  } catch (err: unknown) {
+    return NextResponse.json({ error: (err as Error).message }, { status: 500 });
+  }
 }

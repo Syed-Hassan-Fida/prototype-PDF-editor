@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import {
     Document,
     Packer,
@@ -18,7 +17,7 @@ import { marked } from "marked";
 import katex from "katex";
 import mermaid from "mermaid";
 import sharp from "sharp";
-import { parseDocument, DomUtils, Element, Node } from "htmlparser2";
+import { parseDocument, Element, Node } from "htmlparser2";
 
 // Footnotes collector
 const footnotes: { label: string; text: string }[] = [];
@@ -65,9 +64,13 @@ async function renderMermaidToImage(code: string): Promise<Buffer> {
     try {
         const id = "mmd" + Math.floor(Math.random() * 1000000);
         let svg = "";
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((mermaid as any).render) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             svg = (mermaid as any).render(id, code);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } else if ((mermaid as any).mermaidAPI?.render) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             svg = (mermaid as any).mermaidAPI.render(id, code);
         } else {
             svg = `<svg xmlns="http://www.w3.org/2000/svg"><text x="10" y="20">Mermaid render failed</text></svg>`;
@@ -90,16 +93,17 @@ function parseStyleString(style: string | undefined): Record<string, string> {
     return map;
 }
 
-function mapTextAlign(val?: string): AlignmentType | undefined {
-    if (!val) return undefined;
-    const v = val.toLowerCase();
-    if (v === "center") return AlignmentType.CENTER;
-    if (v === "right") return AlignmentType.RIGHT;
-    if (v === "justify") return AlignmentType.JUSTIFIED;
-    return AlignmentType.LEFT;
-}
+// function mapTextAlign(val?: string): AlignmentType | undefined {
+//     if (!val) return undefined;
+//     const v = val.toLowerCase();
+//     if (v === "center") return AlignmentType.CENTER;
+//     if (v === "right") return AlignmentType.RIGHT;
+//     if (v === "justify") return AlignmentType.JUSTIFIED;
+//     return AlignmentType.LEFT;
+// }
 
 function styleToTextRunOptions(styleMap: Record<string, string>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const opts: any = {};
     if (styleMap["color"]) {
         let color = styleMap["color"].replace(/\s/g, "");
@@ -132,12 +136,16 @@ export async function parseInlineHtml(html: string): Promise<(Paragraph | Table)
         const runs: (TextRun | ImageRun | ExternalHyperlink)[] = [];
 
         for (const node of nodes) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             if ((node as any).type === "text") {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const text = (node as any).data as string;
                 const currentStyle = Object.assign({}, ...styleStack);
                 const opts = styleToTextRunOptions(currentStyle);
                 runs.push(new TextRun(Object.assign({ text }, opts)));
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } else if ((node as any).type === "tag") {
+                
                 const elem = node as Element;
                 const tag = elem.tagName.toLowerCase();
                 const attrs = elem.attribs || {};
@@ -252,6 +260,7 @@ async function parseMarkdownToDocx(markdown: string): Promise<(Paragraph | Table
                 break;
             }
             case "list": {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 token.items.forEach((item: any) => {
                     const text = item.text || "";
                     out.push(new Paragraph({
@@ -341,6 +350,7 @@ export async function markdownToDoc(markdown: string): Promise<Buffer> {
                 },
             ],
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sections: [{ properties: {}, children: children as any }],
     });
 

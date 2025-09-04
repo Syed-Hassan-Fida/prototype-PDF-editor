@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
                 "Content-Disposition": "attachment; filename=converted.docx",
             },
         });
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (err: unknown) {
+        return NextResponse.json({ error: (err as Error).message }, { status: 500 });
     }
 }

@@ -1,8 +1,8 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ImageToPdfPage() {
   type Phase = 'idle' | 'ready' | 'uploading' | 'converting' | 'success' | 'error';
@@ -158,8 +158,8 @@ export default function ImageToPdfPage() {
 
       const msg = await res.text();
       throw new Error(msg || 'Conversion failed.');
-    } catch (e: any) {
-      setError(e?.message || 'Unexpected error.');
+    } catch (e: unknown) {
+      setError((e as Error).message || 'Unexpected error.');
       setPhase('error');
     }
   };
@@ -253,7 +253,7 @@ export default function ImageToPdfPage() {
                       className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]"
                       aria-label={`Image ${idx + 1}: ${it.file.name}`}
                     >
-                      <img src={it.url} alt={it.file.name} className="h-28 w-full object-cover" />
+                      <Image src={it.url} alt={it.file.name} className="h-28 w-full object-cover" width={28} height={28}/>
                       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
 
                       <div className="absolute top-2 left-2 text-[11px] rounded-md bg-black/60 px-1.5 py-0.5">#{idx + 1}</div>

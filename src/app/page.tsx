@@ -10,84 +10,97 @@ export default function Home() {
             <Dot /> Fast, modern & secure
           </span>
           <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight">
-            File Conversion Toolkit
+            Free Online File Conversion Toolkit
           </h1>
           <p className="mt-3 text-lg text-slate-300/90">
-            Simple, fast, and reliable conversions — with an elegant, accessible UI.
+            Convert PDF, Word, Excel, Markdown and Images with our simple,
+            secure and reliable tools — all in your browser.
           </p>
+        </section>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
+        {/* PDF Tools */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">📄 PDF Tools</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ToolCard
               href="/image-to-pdf"
-              className="rounded-lg bg-gradient-to-b from-indigo-400 to-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:brightness-110"
-            >
-              Image → PDF
-            </Link>
-            <Link
+              title="Image to PDF"
+              description="Combine PNG/JPG/WebP into a crisp multi-page PDF — drag, reorder, convert."
+              icon={<ImageStackIcon />}
+            />
+            <ToolCard
               href="/pdf-to-image"
-              className="rounded-lg border border-white/10 bg-white/[0.02] px-5 py-2.5 text-sm text-slate-200 hover:bg-white/[0.06]"
-            >
-              PDF → Images (ZIP)
-            </Link>
-            <Link
-              href="/csv-to-excel"
-              className="rounded-lg border border-white/10 bg-white/[0.02] px-5 py-2.5 text-sm text-slate-200 hover:bg-white/[0.06]"
-            >
-              CSV → Excel
-            </Link>
-            <Link
-              href="/excel-to-csv"
-              className="rounded-lg border border-white/10 bg-white/[0.02] px-5 py-2.5 text-sm text-slate-200 hover:bg-white/[0.06]"
-            >
-              Excel → CSV
-            </Link>
+              title="PDF to Image"
+              description="Turn each page into a clean PNG and download them all in a single ZIP."
+              icon={<PdfPageIcon />}
+            />
+            <ToolCard
+              href="/pdf-sign"
+              title="Sign a PDF"
+              description="Type your signature, drag it onto pages, and download instantly."
+              icon={<PdfPageIcon />}
+            />
           </div>
         </section>
 
-        {/* Tools */}
-        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ToolCard
-            href="/image-to-pdf"
-            title="Image to PDF"
-            description="Combine PNG/JPG/WebP into a crisp multi-page PDF — drag, reorder, convert."
-            icon={<ImageStackIcon />}
-          />
-          <ToolCard
-            href="/pdf-to-image"
-            title="PDF to Image"
-            description="Turn each page into a clean PNG and download them all in a single ZIP."
-            icon={<PdfPageIcon />}
-          />
-          <ToolCard
-            href="/pdf-sign"
-            title="Sign a PDF"
-            description="Type your signature (any font), drag it onto pages, and download."
-            icon={<PdfPageIcon />}
-          />
-          <ToolCard
-            href="/csv-to-excel"
-            title="CSV to Excel"
-            description="Easily convert CSV files into clean, structured Excel spreadsheets."
-            icon={<TableIcon />}
-          />
-          <ToolCard
-            href="/excel-to-csv"
-            title="Excel to CSV"
-            description="Export your Excel data as lightweight, universal CSV files."
-            icon={<TableIcon />}
-          />
+        {/* Spreadsheet Tools */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">📊 Spreadsheet Tools</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ToolCard
+              href="/csv-to-excel"
+              title="CSV to Excel"
+              description="Easily convert CSV files into clean, structured Excel spreadsheets."
+              icon={<TableIcon />}
+            />
+            <ToolCard
+              href="/excel-to-csv"
+              title="Excel to CSV"
+              description="Export your Excel data as lightweight, universal CSV files."
+              icon={<TableIcon />}
+            />
+          </div>
+        </section>
+
+        {/* Markdown & Docs Tools */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">📝 Markdown & Docs Tools</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ToolCard
+              href="/mark-to-doc"
+              title="Markdown to DOCX"
+              description="Convert your Markdown files or text into polished Word documents."
+              icon={<DocIcon />}
+            />
+            <ToolCard
+              href="/doc-to-mark"
+              title="DOCX to Markdown"
+              description="Extract clean Markdown from Word files with live preview."
+              icon={<DocIcon />}
+            />
+          </div>
         </section>
 
         {/* Features */}
         <section className="mt-12 grid gap-4 sm:grid-cols-3 text-sm">
-          <FeatureCard title="SSR by default" desc="Next.js App Router pages render fast and are SEO friendly." />
-          <FeatureCard title="Secure & ephemeral" desc="Processed in memory and not persisted on the server." />
-          <FeatureCard title="Accessible UI" desc="Keyboard-friendly, high-contrast, and screen-reader considerate." />
+          <FeatureCard
+            title="SSR by default"
+            desc="Next.js App Router pages render fast and are SEO friendly."
+          />
+          <FeatureCard
+            title="Secure & ephemeral"
+            desc="Processed in memory and not persisted on the server."
+          />
+          <FeatureCard
+            title="Accessible UI"
+            desc="Keyboard-friendly, high-contrast, and screen-reader considerate."
+          />
         </section>
 
         {/* Footer note */}
         <p className="mt-10 text-center text-xs text-slate-400">
-          We process your files in memory solely to perform conversions and return results. No files are stored.
+          We process your files in memory solely to perform conversions and
+          return results. No files are stored.
         </p>
       </div>
     </div>
@@ -131,6 +144,7 @@ function FeatureCard({ title, desc }: { title: string; desc: string }) {
   );
 }
 
+/* Icons */
 function ArrowRight() {
   return (
     <svg
@@ -221,6 +235,27 @@ function TableIcon() {
     >
       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
       <path d="M3 9h18M9 21V9" />
+    </svg>
+  );
+}
+
+function DocIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <line x1="9" y1="13" x2="15" y2="13" />
+      <line x1="9" y1="17" x2="15" y2="17" />
     </svg>
   );
 }

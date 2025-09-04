@@ -78,13 +78,13 @@ export default function ExcelToCsvPage() {
           setPhase("success");
         } catch (err: unknown) {
           setError("Conversion failed. Make sure the Excel file is valid.");
-          setPhase(`error ${err}`);
+          setPhase("error");
         }
       };
       reader.readAsBinaryString(f);
     } catch (err: unknown) {
-      setError("Unexpected error occurred.");
-      setPhase(`error ${err}`);
+      setError("Conversion failed. Make sure the Excel file is valid.");
+      setPhase("error");
     }
   };
 

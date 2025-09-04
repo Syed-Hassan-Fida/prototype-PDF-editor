@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -78,8 +77,8 @@ export default function CsvToExcelPage() {
           setPhase("error");
         },
       });
-    } catch (e: any) {
-      setError(e.message || "Conversion failed.");
+    } catch (e: unknown) {
+      setError((e as Error).message || "Conversion failed.");
       setPhase("error");
     }
   };

@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
         'Cache-Control': 'no-store',
       },
     });
-  } catch (err: any) {
-    console.error('[image-to-pdf] error:', err);
+  } catch (err: unknown) {
+    console.error('[image-to-pdf] error:', (err as Error).message);
     return new Response('Failed to convert images to PDF.', { status: 500 });
   }
 }
