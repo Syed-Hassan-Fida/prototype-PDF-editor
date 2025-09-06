@@ -12,7 +12,7 @@ export async function PdfToImageConverter(pdfPath: string) {
   const converter = fromPath(pdfPath, {
     density: 100,
     saveFilename: "page",
-    savePath: "./tmp",
+    savePath: "/tmp",
     format: "png",
     width: 800,
     height: 1000,
