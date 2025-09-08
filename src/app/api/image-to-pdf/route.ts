@@ -3,7 +3,8 @@ import { NextRequest } from 'next/server';
 import { PDFDocument } from 'pdf-lib';
 
 // Force Node.js runtime (pdf-lib needs Node, not Edge)
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 // Basic guards — tweak as needed
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png"]);
